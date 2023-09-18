@@ -1,0 +1,316 @@
+[gd_scene load_steps=9 format=3 uid="uid://ub6ostlfsa02"]
+
+[ext_resource type="Texture2D" uid="uid://ci2g7i1j26hyq" path="res://example.webp" id="1_l0o0f"]
+[ext_resource type="Texture2D" uid="uid://ddn1bn0voajvd" path="res://Asset 4Gear.svg" id="2_c35tr"]
+[ext_resource type="Script" path="res://Gear.gd" id="3_tsyro"]
+[ext_resource type="Texture2D" uid="uid://bqtobkou681kj" path="res://Asset 1Bolt.svg" id="4_utkuw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0cefg"]
+radius = 260.0
+
+[sub_resource type="Animation" id="Animation_dd2qo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_e7p3r"]
+resource_name = "Rotate"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ourqr"]
+_data = {
+"RESET": SubResource("Animation_dd2qo"),
+"Rotate": SubResource("Animation_e7p3r")
+}
+
+[node name="GearPuzzle" type="Node2D"]
+
+[node name="Example" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.447059)
+z_index = -5
+scale = Vector2(1.775, 1.75081)
+texture = ExtResource("1_l0o0f")
+centered = false
+
+[node name="MovingGear" type="CharacterBody2D" parent="."]
+position = Vector2(94, 611)
+rotation = 6.28319
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="MovingGear"]
+texture = ExtResource("2_c35tr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingGear"]
+position = Vector2(-4, -5)
+shape = SubResource("CircleShape2D_0cefg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGear"]
+autoplay = "Rotate"
+libraries = {
+"": SubResource("AnimationLibrary_ourqr")
+}
+
+[node name="StaticGear" type="CharacterBody2D" parent="."]
+z_index = -5
+position = Vector2(1242, -70)
+rotation = 6.28319
+scale = Vector2(0.975, 0.975)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticGear"]
+texture = ExtResource("2_c35tr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticGear"]
+position = Vector2(-4, -5)
+shape = SubResource("CircleShape2D_0cefg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StaticGear"]
+libraries = {
+"": SubResource("AnimationLibrary_ourqr")
+}
+
+[node name="Gear1" type="CharacterBody2D" parent="."]
+position = Vector2(487, 467)
+rotation = 6.28319
+scale = Vector2(0.55, 0.55)
+disable_mode = 1
+input_pickable = true
+script = ExtResource("3_tsyro")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gear1"]
+texture = ExtResource("2_c35tr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gear1"]
+position = Vector2(-4, -5)
+shape = SubResource("CircleShape2D_0cefg")
+debug_color = Color(0.996078, 0, 0.192157, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Gear1"]
+libraries = {
+"": SubResource("AnimationLibrary_ourqr")
+}
+
+[node name="Control" type="Control" parent="Gear1"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -264.0
+offset_top = -267.0
+offset_right = 256.0
+offset_bottom = 254.0
+
+[node name="Gear2" type="CharacterBody2D" parent="."]
+z_index = -1
+position = Vector2(664, 587)
+rotation = 6.28319
+scale = Vector2(0.27, 0.27)
+input_pickable = true
+script = ExtResource("3_tsyro")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gear2"]
+texture = ExtResource("2_c35tr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gear2"]
+position = Vector2(-4, -5)
+shape = SubResource("CircleShape2D_0cefg")
+debug_color = Color(0.996078, 0, 0.192157, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Gear2"]
+libraries = {
+"": SubResource("AnimationLibrary_ourqr")
+}
+
+[node name="Control" type="Control" parent="Gear2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -263.0
+offset_top = -265.0
+offset_right = 256.0
+offset_bottom = 254.0
+
+[node name="Gear3" type="CharacterBody2D" parent="."]
+z_index = -2
+position = Vector2(898, 482)
+rotation = 6.28319
+scale = Vector2(0.7, 0.7)
+input_pickable = true
+script = ExtResource("3_tsyro")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gear3"]
+texture = ExtResource("2_c35tr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gear3"]
+position = Vector2(-4, -5)
+shape = SubResource("CircleShape2D_0cefg")
+debug_color = Color(0.996078, 0, 0.192157, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Gear3"]
+libraries = {
+"": SubResource("AnimationLibrary_ourqr")
+}
+
+[node name="Control" type="Control" parent="Gear3"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -265.0
+offset_top = -265.0
+offset_right = 253.0
+offset_bottom = 255.0
+
+[node name="Gear4" type="CharacterBody2D" parent="."]
+z_index = -3
+position = Vector2(1186, 551)
+rotation = 6.28319
+scale = Vector2(0.375, 0.375)
+input_pickable = true
+script = ExtResource("3_tsyro")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gear4"]
+texture = ExtResource("2_c35tr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gear4"]
+position = Vector2(-4, -5)
+shape = SubResource("CircleShape2D_0cefg")
+debug_color = Color(0.996078, 0, 0.192157, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Gear4"]
+libraries = {
+"": SubResource("AnimationLibrary_ourqr")
+}
+
+[node name="Control" type="Control" parent="Gear4"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -263.0
+offset_top = -265.0
+offset_right = 257.0
+offset_bottom = 254.0
+
+[node name="Gear5" type="CharacterBody2D" parent="."]
+z_index = -4
+position = Vector2(1263, 406)
+rotation = 6.28319
+scale = Vector2(0.25, 0.25)
+script = ExtResource("3_tsyro")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gear5"]
+texture = ExtResource("2_c35tr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gear5"]
+position = Vector2(-4, -5)
+shape = SubResource("CircleShape2D_0cefg")
+debug_color = Color(0.996078, 0, 0.192157, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Gear5"]
+libraries = {
+"": SubResource("AnimationLibrary_ourqr")
+}
+
+[node name="Control" type="Control" parent="Gear5"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -263.0
+offset_top = -266.0
+offset_right = 255.0
+offset_bottom = 255.0
+
+[node name="Gear6" type="CharacterBody2D" parent="."]
+z_index = -5
+position = Vector2(1173, 277)
+rotation = 6.28319
+scale = Vector2(0.355, 0.355)
+script = ExtResource("3_tsyro")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gear6"]
+texture = ExtResource("2_c35tr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gear6"]
+position = Vector2(-4, -5)
+shape = SubResource("CircleShape2D_0cefg")
+debug_color = Color(0.996078, 0, 0.192157, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Gear6"]
+libraries = {
+"": SubResource("AnimationLibrary_ourqr")
+}
+
+[node name="Control" type="Control" parent="Gear6"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -263.0
+offset_top = -265.0
+offset_right = 255.0
+offset_bottom = 253.0
+
+[node name="GearSnapGroup" type="Node2D" parent="."]
+
+[node name="Snap1" type="Marker2D" parent="GearSnapGroup"]
+position = Vector2(487, 467)
+
+[node name="Sprite2D" type="Sprite2D" parent="GearSnapGroup/Snap1"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_utkuw")
+
+[node name="Snap2" type="Marker2D" parent="GearSnapGroup"]
+position = Vector2(664, 587)
+
+[node name="Sprite2D" type="Sprite2D" parent="GearSnapGroup/Snap2"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_utkuw")
+
+[node name="Snap3" type="Marker2D" parent="GearSnapGroup"]
+position = Vector2(898, 482)
+
+[node name="Sprite2D" type="Sprite2D" parent="GearSnapGroup/Snap3"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_utkuw")
+
+[node name="Snap4" type="Marker2D" parent="GearSnapGroup"]
+position = Vector2(1186, 555)
+
+[node name="Sprite2D" type="Sprite2D" parent="GearSnapGroup/Snap4"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_utkuw")
+
+[node name="Snap5" type="Marker2D" parent="GearSnapGroup"]
+position = Vector2(1264, 406)
+
+[node name="Sprite2D" type="Sprite2D" parent="GearSnapGroup/Snap5"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_utkuw")
+
+[node name="Snap6" type="Marker2D" parent="GearSnapGroup"]
+position = Vector2(1173, 277)
+
+[node name="Sprite2D" type="Sprite2D" parent="GearSnapGroup/Snap6"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_utkuw")
+
+[connection signal="gui_input" from="Gear1/Control" to="Gear1" method="_on_gui_input"]
+[connection signal="gui_input" from="Gear2/Control" to="Gear2" method="_on_gui_input"]
+[connection signal="gui_input" from="Gear3/Control" to="Gear3" method="_on_gui_input"]
+[connection signal="gui_input" from="Gear4/Control" to="Gear4" method="_on_gui_input"]
+[connection signal="gui_input" from="Gear5/Control" to="Gear5" method="_on_gui_input"]
+[connection signal="gui_input" from="Gear6/Control" to="Gear6" method="_on_gui_input"]
